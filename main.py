@@ -13,7 +13,6 @@ class App:
         self.privateKey = 'ScQezVwW18q2JwQ1hf6k3d39jXpJdyxD2M2tK4jV'
         #COMANDOS DE EJECUCION EN RANCHER
         self.initCmd = 'rancher --wait {0} {1} --type stack'
-        self.upgradeCmd = 'rancher-compose --access-key {0} --secret-key {1} --url {2} -f {3}_docker.compose.yml'
         self.healthState = 'rancher inspect --format {{.healthState}} --type stack '
         self.status = '{0} status is {1}'
 
@@ -59,7 +58,5 @@ if __name__ == "__main__":
         a.stop()
     elif order == 'restart':
         a.restart()
-    elif order == 'upgrade':
-        a.upgrade()
     elif order == 'status':
         print a.status.format(stack, a.checkhealthstate())
