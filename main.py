@@ -7,11 +7,13 @@ class App:
 
     def __init__(self, stack):
         self.stack = stack
+        #VARIABLES DE ACCESO A RANCHER
         self.rancherUrl = 'http://172.17.0.2:8080'
-        self.initCmd = 'rancher --wait {0} {1} --type stack'
-        self.upgradeCmd = 'rancher-compose --access-key {0} --secret-key {1} --url {2} -f {3}_docker.compose.yml'
         self.accessKey = 'B7050CC048EE53A2D4F3'
         self.privateKey = 'ScQezVwW18q2JwQ1hf6k3d39jXpJdyxD2M2tK4jV'
+        #COMANDOS DE EJECUCION EN RANCHER
+        self.initCmd = 'rancher --wait {0} {1} --type stack'
+        self.upgradeCmd = 'rancher-compose --access-key {0} --secret-key {1} --url {2} -f {3}_docker.compose.yml'
         self.healthState = 'rancher inspect --format {{.healthState}} --type stack '
         self.status = '{0} status is {1}'
 
