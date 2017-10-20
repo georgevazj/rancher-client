@@ -3,7 +3,7 @@
 import sys,os
 
 
-class App:
+class Main:
 
     def __init__(self, stack):
         self.stack = stack
@@ -51,12 +51,12 @@ class App:
 if __name__ == "__main__":
     stack = sys.argv[1]
     order = sys.argv[2]
-    a = App(stack)
+    main = Main(stack)
     if order == 'start':
-        a.start()
+        main.start()
     elif order == 'stop':
-        a.stop()
+        main.stop()
     elif order == 'restart':
-        a.restart()
+        main.restart()
     elif order == 'status':
-        print a.status.format(stack, a.checkhealthstate())
+        print main.status.format(stack, main.checkhealthstate())
