@@ -19,44 +19,49 @@ class Main:
     def start(self):
         command = self.initCmd.format('start', self.stack)
         state = self.checkhealthstate()
+        output  = ''
         if state == 'unhealthy':
             print 'Starting ', self.stack
-            self.launch(command)
+            output = self.launch(command)
+        return output
 
     def stop(self):
         command = self.initCmd.format('stop', self.stack)
         state = self.checkhealthstate()
+        output = ''
         if state == 'healthy':
             print 'Stopping ', self.stack
-            self.launch(command)
+            output = self.launch(command)
+        return output
 
     def restart(self):
         command = self.initCmd.format('restart', self.stack)
         state = self.checkhealthstate()
+        output = ''
         if state == 'healthy':
             print 'Restarting ', self.stack
-            self.launch(command)
-
-    def upgrade(self):
-        command = self.upgradeCmd.format(self.accessKey, self.privateKey, self.rancherUrl, self.stack)
-        self.launch(command)
+            output = self.launch(command)
+        return output
 
     def checkhealthstate(self):
         return os.popen(self.healthState + self.stack).read().strip()
 
     def launch(self, command):
         output = os.popen(command).read().strip()
+        return output
 
 
 if __name__ == "__main__":
     stack = sys.argv[1]
     order = sys.argv[2]
     main = Main(stack)
+    output = ''
     if order == 'start':
-        main.start()
+        output = main.start()
     elif order == 'stop':
-        main.stop()
+        output = main.stop()
     elif order == 'restart':
-        main.restart()
+        output = main.restart()
     elif order == 'status':
         print main.status.format(stack, main.checkhealthstate())
+    sys.exit(0)
